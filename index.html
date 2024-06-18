@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <script>
+        // Function to get computer's choice
+        const getComputerChoice = () => {
+            const computerChoice = Math.floor(Math.random() * 3) + 1;
+            if (computerChoice === 1) {
+                return 'Rock';
+            } else if (computerChoice === 2) {
+                return 'Paper';
+            } else {
+                return 'Scissor';
+            }
+        }
+
+        // Function to get human's choice
+        const getHumanChoice = () => {
+            const humanChoice = prompt('Enter your move (Rock, Paper, or Scissor)').toLowerCase();
+            return humanChoice;
+        }
+
+        // Function to play a single round
+        const playRound = (humanChoice, computerChoice) => {
+            if (humanChoice === 'rock' && computerChoice === 'Paper'){
+                console.log("You lose! " + computerChoice + " beats " + humanChoice);
+                return 'computer';
+            } else if (humanChoice === 'rock' && computerChoice === 'Scissor'){
+                console.log("You win! " + humanChoice + " beats " + computerChoice);
+                return 'human';
+            } else if (humanChoice === 'scissor' && computerChoice === 'Rock'){
+                console.log("You lose! " + computerChoice + " beats " + humanChoice);
+                return 'computer';
+            } else if (humanChoice === 'scissor' && computerChoice === 'Paper'){
+                console.log("You win! " + humanChoice + " beats " + computerChoice);
+                return 'human';
+            } else if (humanChoice === 'paper' && computerChoice === 'Scissor'){
+                console.log("You lose! " + computerChoice + " beats " + humanChoice);
+                return 'computer';
+            } else if (humanChoice === 'paper' && computerChoice === 'Rock'){
+                console.log("You win! " + humanChoice + " beats " + computerChoice);
+                return 'human';
+            } else {
+                console.log("This is a draw");
+                return 'draw';
+            }
+        }
+
+        // Function to play the game
+        const playGame = () => {
+            let humanScore = 0;
+            let computerScore = 0;
+            let plays = 0;
+            
+            while (plays < 5) {
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                
+                const roundResult = playRound(humanSelection, computerSelection);
+                
+                if (roundResult === 'human') {
+                    humanScore++;
+                } else if (roundResult === 'computer') {
+                    computerScore++;
+                }
+                
+                plays++;
+            }
+
+            console.log(`Final Score - Human: ${humanScore}, Computer: ${computerScore}`);
+            if (humanScore > computerScore) {
+                console.log("Congratulations! You won the game.");
+            } else if (computerScore > humanScore) {
+                console.log("Sorry, you lost the game.");
+            } else {
+                console.log("The game is a draw.");
+            }
+        }
+
+        // Start the game
+        playGame();
+    </script>
+</body>
+</html>
